@@ -1,0 +1,3 @@
+[submodule "Chat-bot"]
+	path = Chat-bot
+	url = https://github.com/Akhillesh618/Chat-bot.git
