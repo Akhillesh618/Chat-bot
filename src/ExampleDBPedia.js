@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import ChatBot, { Loading } from "react-simple-chatbot";
 import qs from "qs";
 import axios from "axios";
-
+import configData from "./config.json";
+import { useState } from "react";
 class DBPedia extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ class DBPedia extends Component {
       loading: true,
       result: "",
       trigger: false,
+      resp: "",
     };
 
     this.triggetNext = this.triggetNext.bind(this);
@@ -21,7 +23,7 @@ class DBPedia extends Component {
     const self = this;
     const { steps } = this.props;
     const search = steps.search.value;
-    console.log(search);
+    // console.log(search);
 
     const endpoint = encodeURI("https://dbpedia.org");
     const query = encodeURI(`
@@ -40,26 +42,28 @@ class DBPedia extends Component {
 
     function readyStateChange() {
       if (this.readyState === 4) {
-        const bindings = "";
         if (search != null) {
           console.log(search);
+
           axios({
             method: "post",
-            url: "http://medha.dachrs.com:8000/accounts/login/",
+            url: configData.SERVER_URL + "faq",
             data: qs.stringify({
               user_quest: search,
             }),
           })
             .then(function(response) {
-              bindings(response.data.Answer)
+              console.log(response.data.message);
+
+              const bindings = response.data.message;
+              if (bindings && bindings.length > 0) {
+                self.setState({ loading: false, result: bindings });
+              }
             })
             .catch(function(error) {
               console.log(error);
             });
         }
-        if (bindings && bindings.length > 0) {
-          self.setState({ loading: false, result: bindings });
-        } 
       }
     }
 
@@ -87,7 +91,7 @@ class DBPedia extends Component {
             }}
           >
             {!trigger && (
-              <button onClick={() => this.triggetNext()}>Search Again</button>
+              <button  onClick={() => this.triggetNext()}>Search Again</button>
             )}
           </div>
         )}
@@ -101,7 +105,7 @@ DBPedia.propTypes = {
   triggerNextStep: PropTypes.func,
   headerTitle: PropTypes.string,
   botAvatar: PropTypes.string,
-  userAvatar: PropTypes.string
+  userAvatar: PropTypes.string,
 };
 
 DBPedia.defaultProps = {

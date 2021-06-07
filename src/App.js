@@ -18,8 +18,7 @@ const App = (props) => {
       <div className="header">
         <h2>TEAM DACHRS!!!</h2>
       </div>
-      
-      
+
       <div className="bot">
         <div style={{ display: showChat ? "" : "none" }}>
           {/* <SimpleForm></SimpleForm> */}
@@ -29,12 +28,17 @@ const App = (props) => {
         {/* <div> {showChat ? <SimpleForm></SimpleForm> : null} </div> */}
         <div>
           {!showChat ? (
-            <button className="btn" onClick={() => startChat()}>
-              click to chat...{" "}
+            <button
+              className="btn"
+              onClick={() => startChat()}
+            >
+            <img className="img" src="https://w7.pngwing.com/pngs/1001/63/png-transparent-internet-bot-computer-icons-chatbot-sticker-electronics-face-careobot.png"
+              alt=""/>
+              {" "}
             </button>
           ) : (
             <button className="btn" onClick={() => hideChat()}>
-              click to hide...{" "}
+              X{" "}
             </button>
           )}
         </div>
