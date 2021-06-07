@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import SimpleForm from "./Simpleform";
+import SimpleForm from "./Simpleform";
 import "./App.css";
 import ExampleDBPedia from "./ExampleDBPedia";
 

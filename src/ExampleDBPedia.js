@@ -91,7 +91,7 @@ class DBPedia extends Component {
             }}
           >
             {!trigger && (
-              <button  onClick={() => this.triggetNext()}>Search Again</button>
+              <button  onClick={() => this.triggetNext()}></button>
             )}
           </div>
         )}
@@ -129,7 +129,7 @@ const ExampleDBPedia = () => (
       {
         id: "3",
         component: <DBPedia />,
-        waitAction: true,
+        // waitAction: true,
         trigger: "1",
       },
     ]}
