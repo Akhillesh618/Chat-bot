@@ -4,7 +4,7 @@ import ChatBot, { Loading } from "react-simple-chatbot";
 import qs from "qs";
 import axios from "axios";
 import configData from "./config.json";
-import { useState } from "react";
+// import { useState } from "react";
 class DBPedia extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +15,7 @@ class DBPedia extends Component {
       trigger: false,
       resp: "",
     };
+    
 
     this.triggetNext = this.triggetNext.bind(this);
   }
