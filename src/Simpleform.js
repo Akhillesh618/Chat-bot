@@ -20,6 +20,7 @@ class Review extends Component {
   componentWillMount() {
     const { steps } = this.props;
     const { userMessege,apiResponse } = steps;
+    var self=this;
     this.setState({ userMessege,apiResponse });
     if(userMessege.value!==""){
       console.log(userMessege.value);
@@ -31,27 +32,33 @@ class Review extends Component {
         }),
       })
         .then(function(response) {
-          console.log(response.data.message);
-          debugger
+          // console.log(response.data.message);
+          // debugger
           userMessege.value=response.data.message;
-          apiResponse.value=response.data.message;
+          //  apiResponse=response.data.message;
+          self.setState({apiResponse:response.data.message});
+           
+          
         })
         .catch(function(error) {
           console.log(error);
         });
+        console.log(self.state.apiResponse);
     }
     
   }
 
   render() {
-    const { userMessege } = this.state;
+    // const { userMessege } = this.state;
+    // var apiresponse =this.state.apiResponse
    
     return (
       <div style={{ width: '100%' }}>
         <table>
           <tbody>
             <tr>
-              <td>{userMessege.value}</td>
+              {/* <td>{userMessege.value}</td> */}
+              <td>{this.state.apiResponse}</td>
             </tr>
             
           </tbody>
@@ -67,7 +74,9 @@ Review.propTypes = {
   hideBotAvatar:PropTypes.bool,
   hideUserAvatar:PropTypes.bool,
   enableSmoothScroll:PropTypes.bool,
-  floating:PropTypes.bool
+  floating:PropTypes.bool,
+  userDelay:PropTypes.number,
+  botDelay:PropTypes.number
 };
 
 Review.defaultProps = {
@@ -107,6 +116,8 @@ class SimpleForm extends Component {
         enableSmoothScroll="true"
         floating="true"
         headerTitle="Dachers ChatBot"
+        userDelay="1000"
+        botDelay="1000"
       />
     );
   }
